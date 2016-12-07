@@ -14,7 +14,7 @@ app.get('/*', function (req, res, next) {
     res.sendFile("index.html", { root: __dirname + "/public"} )
 });
 
-const PORT = 8086;
+const PORT = 8087;
 app.listen(PORT, function () {
     console.log('listening on ' + PORT);
 });
