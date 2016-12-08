@@ -1,3 +1,33 @@
+nav {
+    margin-bottom: 10px;
+}
 nav a {
     color: black !important;
+}
+textarea {
+    border: none;
+    resize: none;
+    height: 100px;
+    outline: none;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar {
+width: 6px;
+height: 10px;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment  {
+height: 10px;
+background-color: transparent;
+}
+::-webkit-scrollbar-track-piece  {
+background-color: #eeeeee;
+-webkit-border-radius: 16px;
+}
+::-webkit-scrollbar-thumb:vertical {
+height: 10px;
+background-color: #666;
+border: 1px solid #eee;
+-webkit-border-radius: 16px;
 }
