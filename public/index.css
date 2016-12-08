@@ -31,3 +31,12 @@ background-color: #666;
 border: 1px solid #eee;
 -webkit-border-radius: 16px;
 }
+
+.news .add {
+    transition: background-color 0.2s ease-out;
+    cursor: pointer;
+    padding: 5px;   
+}
+.news .add:hover {
+    background-color: #ddd;
+}
