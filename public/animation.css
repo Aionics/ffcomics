@@ -1,0 +1,84 @@
+nav {
+    margin-bottom: 10px;
+}
+nav a {
+    color: black !important;
+}
+textarea {
+    border: none;
+    resize: none;
+    height: 100px;
+    outline: none;
+    box-shadow: none;
+}
+
+::-webkit-scrollbar {
+width: 6px;
+height: 10px;
+}
+::-webkit-scrollbar-button:start:decrement,
+::-webkit-scrollbar-button:end:increment  {
+height: 10px;
+background-color: transparent;
+}
+::-webkit-scrollbar-track-piece  {
+background-color: #eeeeee;
+-webkit-border-radius: 16px;
+}
+::-webkit-scrollbar-thumb:vertical {
+height: 10px;
+background-color: #666;
+border: 1px solid #eee;
+-webkit-border-radius: 16px;
+}
+
+.news .add {
+    transition: background-color 0.2s ease-out;
+    cursor: pointer;
+    padding: 5px;
+}
+.news .add:hover {
+    background-color: #ddd;
+}
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  -webkit-perspective: 1200;
+  perspective: 1200;
+  -moz-transform: perspective(1200px);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+div {
+  width: 400px;
+  height: 400px;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+img {
+  position: absolute;
+  height: 100%;
+  width: 100%x;
+  -webkit-animation: turn 2s infinite;
+  animation: turn 2s infinite;
+}
+.front {
+  z-index: 2;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+@-webkit-keyframes turn {
+  to {
+    -webkit-transform: rotateY(360deg);
+  }
+}
+@keyframes turn {
+  to {
+    transform: rotateY(360deg);
+  }
+}

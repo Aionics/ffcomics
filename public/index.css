@@ -1,4 +1,5 @@
 nav {
+    margin-top: 20px;
     margin-bottom: 10px;
 }
 nav a {
@@ -11,7 +12,8 @@ textarea {
     outline: none;
     box-shadow: none;
 }
-
+.brand-logo img {width: 64px; height: 64px;}
+.white {box-shadow: none !important;}
 ::-webkit-scrollbar {
 width: 6px;
 height: 10px;
@@ -35,7 +37,7 @@ border: 1px solid #eee;
 .news .add {
     transition: background-color 0.2s ease-out;
     cursor: pointer;
-    padding: 5px;   
+    padding: 5px;
 }
 .news .add:hover {
     background-color: #ddd;
