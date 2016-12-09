@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 
 // app.use('/', express.static('./public'));
 app.get('/*', function (req, res, next) {
-    var ip = req.connection.remoteAddress ||
+    var ip = req.headers['x-forwarded-for'] ||
+        req.connection.remoteAddress ||
         req.socket.remoteAddress ||
         req.connection.socket.remoteAddress;
     //This becouse i want your real ip c:
