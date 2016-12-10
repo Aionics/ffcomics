@@ -14,8 +14,6 @@ api.post('/auth', function (req, res) {
         return res.send('fill_required');
     }
 
-    console.log(User);
-
     User.findOne({
         login: login,
         password: User.hashPassword(password)

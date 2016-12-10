@@ -25,14 +25,14 @@ app.use(session({
 }))
 
 app.use('/admin', require('./controllers/admin'));
-
-app.use('/', express.static('./public'));
 app.use('/admin', express.static('./admin'));
-
 app.get('/admin', function(req, res, next) {
     res.sendFile("admin.html", { root: __dirname + "/admin"} )
 })
-app.get('/^(?!\/api\/).*$/', function (req, res, next) {
+
+
+app.use('/', express.static('./public'));
+app.get('/*', function (req, res, next) {
     res.sendFile("index.html", { root: __dirname + "/public"} )
 });
 
