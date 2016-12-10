@@ -32,7 +32,7 @@ app.use('/admin', express.static('./admin'));
 app.get('/admin', function(req, res, next) {
     res.sendFile("admin.html", { root: __dirname + "/admin"} )
 })
-app.get('/', function (req, res, next) {
+app.get('/^(?!\/api\/).*$/', function (req, res, next) {
     res.sendFile("index.html", { root: __dirname + "/public"} )
 });
 
