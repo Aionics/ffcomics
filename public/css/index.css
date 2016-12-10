@@ -1,0 +1,50 @@
+nav {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+nav a {
+    color: black !important;
+}
+textarea {
+    border: none;
+    resize: none;
+    height: 100px;
+    outline: none;
+    box-shadow: none;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 10px;
+}
+::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
+    height: 10px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #eeeeee;
+    -webkit-border-radius: 16px;
+}
+::-webkit-scrollbar-thumb:vertical {
+    height: 10px;
+    background-color: #666;
+    border: 1px solid #eee;
+    -webkit-border-radius: 16px;
+}
+.news .add {
+    transition: background-color 0.2s ease-out;
+    cursor: pointer;
+    padding: 5px;
+}
+.news .add:hover {
+    background-color: #ddd;
+}
+.hprofile {
+    height: 450px !important;
+}
+
+.brand-logo i {
+    width: 54px;
+    height: 64px;
+    background: url('/resources/img/ffcomics.png') no-repeat 0 0;
+    background-size: auto 64px;
+}
