@@ -1,0 +1,13 @@
+<div class="form">
+    <form data-bind="with: m_auth">
+        <div class="input-field col s6">
+            <input id="login" type="text" data-bind="textInput: login">
+            <label for="login">Логин</label>
+        </div>
+        <div class="input-field col s6">
+            <input id="password" type="password" data-bind="textInput: password">
+            <label for="password">Пароль</label>
+        </div>
+      <a class="waves-effect waves-light btn" data-bind="click: authorize">Войти</a>
+    </form>
+</div>

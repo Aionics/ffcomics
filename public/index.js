@@ -17,6 +17,7 @@ m_site.pages([
     }
 ])
 
+
 $(document).ready(function(){
     var pager = new Pager($, ko);
 	pager.extendWithPage(m_site);

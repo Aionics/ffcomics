@@ -10,9 +10,17 @@ const hashPassword = function(password) {
     return hash;
 };
 
-var User = new Schema({
-    login: {type: String},
-    password: {type: String}
-});
+const UserProps = {
+    all: {
+        login: {type: String},
+        password: {type: String}
+    }
+};
+
+const UserSchema = new Schema(UserProps.all);
+UserSchema.static.hashPassword = hashPassword;
+
+const User = mongoose.model('User', UserSchema);
+
 
 module.exports = User;
