@@ -9,10 +9,7 @@ const api = express();
 function checkIsAdmin(req, res, next) {
     if (req.session.user_id) {
 
-        User.findOne({
-            login: login,
-            password: User.hashPassword(password)
-        }, function(err, user) {
+        User.findById(req.session.user_id, function(err, user) {
             if (err) {
                 return res.send(err);
             }
