@@ -66,8 +66,9 @@ api.post('/logout', function(req, res) {
 });
 
 api.post('/createAdmin', checkIsAdmin, function(req, res) {
+    console.log('1');
     const NewUser = mongoose.model('User');
-
+    console.log(2);
     let user = {
         login: req.body.login,
         password: NewUser.hashPassword(req.body.password),
