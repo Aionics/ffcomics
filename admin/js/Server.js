@@ -8,7 +8,7 @@ var Server = (function(){
                 data: JSON.stringify(data),
                 dataType: 'JSON',
                 contentType: 'application/json',
-                success: function() { done(); },
+                success: function(message) { done(message.err, message.data); },
                 error: function(xhr, status, err) {
                     console.log('network error: ', status, err);
                 }
