@@ -80,7 +80,7 @@ api.post('/createAdmin', checkIsAdmin, function(req, res) {
         console.log('created user: ', user);
         res.send({
             err:null,
-            message: 'done')
+            message: 'done'
         });
     });
 })
