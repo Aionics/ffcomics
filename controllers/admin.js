@@ -78,7 +78,10 @@ api.post('/createAdmin', checkIsAdmin, function(req, res) {
     console.log('trying create new user:', user);
     NewUser.create(user, function() {
         console.log('created user: ', user);
-        res.send(null, 'done');
+        res.send({
+            err:null,
+            message: 'done')
+        });
     });
 })
 
