@@ -12,7 +12,8 @@ const hashPassword = function(password) {
 
 const UserProps = {
     login: String,
-    password: String
+    password: String,
+    is_admin: Boolean
 };
 
 const UserSchema = new Schema(UserProps);

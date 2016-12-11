@@ -14,6 +14,8 @@ api.post('/auth', function (req, res) {
         return res.send('fill_required');
     }
 
+    console.log(req.session);
+
     User.findOne({
         login: login,
         password: User.hashPassword(password)
@@ -31,7 +33,7 @@ api.post('/auth', function (req, res) {
             console.log('admin authed: ', user);
             res.send({
                 err: null,
-                user: user
+                user: user.toObject()
             });
         });
     });
