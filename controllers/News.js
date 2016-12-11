@@ -5,6 +5,7 @@ const transliterate = require('transliterate');
 const api = express();
 
 const News = require('../models/News');
+const User = require('../models/User');
 const upload = multer({ dest: '../resources/' })
 
 function checkIsAdmin(req, res, next) {
