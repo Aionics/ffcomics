@@ -32,7 +32,9 @@ m_auth.authorize = function () {
         if (err) {
             return console.log('login error: ', err);
         }
+        console.log(user);
         m_admin.user(user);
+        console.log(m_admin.user());
         pager.navigate('/admin');
     })
 };
