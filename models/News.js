@@ -10,8 +10,6 @@ const NewsProps = {
 };
 
 const NewsSchema = new Schema(NewsProps);
-NewsSchema.statics.hashPassword = hashPassword;
-
 const News = mongoose.model('News', NewsSchema);
 
 module.exports = News;
