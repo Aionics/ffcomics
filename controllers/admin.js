@@ -51,7 +51,7 @@ api.post('/auth', function(req, res) {
             console.log('admin authed: ', user);
             res.send({
                 err: null,
-                user: user.toObject()
+                data: user.toObject()
             });
         });
     });
