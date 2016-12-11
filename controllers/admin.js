@@ -19,6 +19,7 @@ function checkIsAdmin(req, res, next) {
                 return res.send('You are not an admin. If you are, try to relog');
             }
             console.log('success');
+            next();
         });
     } else {
         return res.send('you need to log in');
