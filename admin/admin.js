@@ -1,13 +1,18 @@
 var m_admin = {
-    pages: ko.observableArray([])
+    pages: ko.observableArray([]),
+    user: ko.observable()
 };
 
 m_admin.pages([
     {
         id: 'login',
         name: '',
-        title: '',
         src: 'pages/Login.html'
+    },
+    {
+        id: 'news',
+        name: 'Новости',
+        src: 'pages/News.html'
     }
 ])
 
@@ -23,13 +28,25 @@ m_auth.authorize = function () {
         password: m_auth.password()
     }
 
-    Server.post('/admin/auth', data, function (err, response) {
+    Server.post('/admin/auth', data, function (err, user) {
         if (err) {
             return console.log('login error: ', err);
         }
-        console.log(response);
+        m_admin.user(user);
+        pager.navigate('/admin');
     })
 };
+
+m_createNews = {
+    title: ko.observable(),
+    lead: ko.observable(),
+    text: ko.observable(),
+    file: ko.observable()
+}
+
+m_admin.load = function (id) {
+    console.log(id);
+}
 
 $(document).ready(function(){
     var pager = new Pager($, ko);

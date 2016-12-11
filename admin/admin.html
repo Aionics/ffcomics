@@ -17,13 +17,29 @@
     </head>
     <body>
 
-        <!-- ko foreach: pages -->
-		<div data-bind="page: {
-			id: id,
-			source: src,
-			title: 'FriendlyFire Comics ' + title
-		}"></div>
-		<!-- /ko -->
+        <div class="row">
+            <!-- ko if: user -->
+            <div class="col s3">
+                <div class="sidebar">
+                    <ul>
+                        <!-- ko foreach: pages -->
+                        <!-- ko if: id !== 'login' -->
+                        <li><a class="waves-effect waves-light btn" data-bind="text: name, click: function(){m_admin.load(id); pager.navigate(id);}"></a></li>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </ul>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="col s9">
+                <!-- ko foreach: pages -->
+                <div data-bind="page: {
+                    id: id,
+                    source: src,
+                }"></div>
+                <!-- /ko -->
+            </div>
+        </div>
 
     </body>
 </html>

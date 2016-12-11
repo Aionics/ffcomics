@@ -1,13 +1,21 @@
 <div class="form">
     <form data-bind="with: m_auth">
-        <div class="input-field col s6">
-            <input id="login" type="text" data-bind="textInput: login">
-            <label for="login">Логин</label>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="login" type="text" data-bind="textInput: login">
+                <label for="login">Логин</label>
+            </div>
         </div>
-        <div class="input-field col s6">
-            <input id="password" type="password" data-bind="textInput: password">
-            <label for="password">Пароль</label>
+        <div class="row">
+            <div class="input-field col s8 offset-s2">
+                <input id="password" type="password" data-bind="textInput: password">
+                <label for="password">Пароль</label>
+            </div>
         </div>
-      <a class="waves-effect waves-light btn" data-bind="click: authorize">Войти</a>
+        <div class="row">
+            <div class="col s12 center-align">
+                <a class="waves-effect waves-light btn" data-bind="click: authorize">Войти</a>
+            </div>
+        </div>
     </form>
 </div>

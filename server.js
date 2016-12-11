@@ -10,8 +10,11 @@ const MongoStore = require('connect-mongo')(session);
 const config = require('./config')
 
 app.set('json spaces', 40);
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(bodyParser({
+  uploadDir: path.join(__dirname, '../public/upload/temp')
+}));
 app.use(cookie_parser(config.session_secret));
 app.use(session({
     secret: config.session_secret,
@@ -21,17 +24,19 @@ app.use(session({
     secure: true,
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({mongooseConnection: mongoose.connection})
+    // store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
 
 app.use('/admin', require('./controllers/admin'));
 app.use('/admin', express.static('./admin'));
+app.use('/admin', express.static('./resources'));
 app.get('/admin', function(req, res, next) {
     res.sendFile("admin.html", { root: __dirname + "/admin"} )
 })
 
 
 app.use('/', express.static('./public'));
+app.use('/admin', express.static('./resources'));
 app.get('/*', function (req, res, next) {
     res.sendFile("index.html", { root: __dirname + "/public"} )
 });
@@ -41,6 +46,6 @@ app.listen(PORT, function () {
     console.log('listening on ' + PORT);
 });
 
-if (!module.parent) {
-    mongoose.connect(config.mongo_url, {safe: false});
-}
+// if (!module.parent) {
+//     mongoose.connect(config.mongo_url, {safe: false});
+// }
