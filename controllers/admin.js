@@ -72,7 +72,8 @@ api.post('/createAdmin', checkIsAdmin, function(req, res) {
         password: NewUser.hashPassword(req.body.password),
         is_admin: true
     }
-    NewUser.create(user, function(){
+    console.log('trying create new user:', user);
+    NewUser.create(user, function() {
         console.log('created user: ', user);
         res.send(null, 'done');
     });
