@@ -60,13 +60,25 @@ api.post('/auth', function(req, res) {
     });
 });
 
-api.post('/createAdmin', function(req, res) {
-    const User1 = mongoose.model('User');
-    User1.create({
-        login: 'Aionics',
-        password: User1.hashPassword('pizda'),
+api.post('/logout', function(req, res) {
+    req.session.user_id = null;
+    req.session.save(function() {
+        res.send();
+    });
+});
+
+api.post('/createAdmin', checkIsAdmin, function(req, res) {
+    const NewUser = mongoose.model('User');
+
+    let user = {
+        login: req.body.login,
+        password: NewUser.hashPassword(req.body.password),
         is_admin: true
-    }, function(){console.log('created');});
+    }
+    NewUser.create(user, function(){
+        console.log('created user: ', user);
+        res.send(null, 'done');
+    });
 })
 
 module.exports = api;
