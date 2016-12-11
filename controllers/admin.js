@@ -7,6 +7,7 @@ const User = require('../models/User');
 const api = express();
 
 function checkIsAdmin(req, res, next) {
+    console.log('checking for admin');
     if (req.session.user_id) {
 
         User.findById(req.session.user_id, function(err, user) {
