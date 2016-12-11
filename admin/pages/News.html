@@ -1,7 +1,7 @@
 <h4>create news</h4>
 <div class="row">
     <div class="col s6">
-        <form data-bind="with: m_news">
+        <form data-bind="with: m_createNews">
             <div class="input-field">
                 <input id="news-title" type="text" data-bind="textInput: title">
                 <label for="news-title">Заголовок</label>
@@ -17,14 +17,14 @@
             <div class="file-field input-field">
                 <div class="btn">
                     <span>Изображение</span>
-                    <input type="file">
+                    <input type="file" data-bind="file: file">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
                 </div>
             </div>
 
+            <a class="waves-effect waves-light btn" data-bind="click: function() {m_createNews.create()} ">create</a>
         </form>
-        <a class="waves-effect waves-light btn">create</a>
     </div>
 </div>

@@ -44,6 +44,21 @@ m_createNews = {
     file: ko.observable()
 }
 
+m_createNews.create = function () {
+    var data = {
+        title: m_createNews.title(),
+        lead: m_createNews.lead(),
+        text: m_createNews.text(),
+        file: m_createNews.file(),
+    }
+    Server.post('/api/news/create', data, function(err, data){
+        if (err) {
+            return console.log('login error: ', err);
+        }
+        console.log(data);
+    });
+}
+
 m_admin.load = function (id) {
     console.log(id);
 }

@@ -27,6 +27,8 @@ app.use(session({
     store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
 
+app.use('/api/news', require('./controllers/News'));
+
 app.use('/admin', require('./controllers/admin'));
 app.use('/admin', express.static('./admin'));
 app.use('/admin', express.static('./resources'));
