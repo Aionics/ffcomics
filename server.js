@@ -24,7 +24,7 @@ app.use(session({
     secure: true,
     resave: false,
     saveUninitialized: true,
-    // store: new MongoStore({mongooseConnection: mongoose.connection})
+    store: new MongoStore({mongooseConnection: mongoose.connection})
 }))
 
 app.use('/admin', require('./controllers/admin'));
@@ -46,6 +46,6 @@ app.listen(PORT, function () {
     console.log('listening on ' + PORT);
 });
 
-// if (!module.parent) {
-//     mongoose.connect(config.mongo_url, {safe: false});
-// }
+if (!module.parent) {
+    mongoose.connect(config.mongo_url, {safe: false});
+}
