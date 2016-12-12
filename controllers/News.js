@@ -30,6 +30,7 @@ function checkIsAdmin(req, res, next) {
 
 
 api.post('/create', checkIsAdmin, function(req, res) {
+    console.log(req.body);
     let {title, lead, text} = req.body;
 
     let busboy = new Busboy({
