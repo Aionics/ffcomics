@@ -1,8 +1,34 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const Busboy = require('busboy');
+const path = require('path');
 const transliterate = require('transliterate');
 const api = express();
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'data/images/');
+    }, 
+    filename: function (req, file, cb) {
+        console.log(req);
+        let newName = transliterate(req.body.title).replace(' ', '_');
+        newName = escape(newName);
+        newName = newName + '-' + Date.now() + path.extname(file.originalname);
+        console.log('newName: ', newName)
+        cb(null, newName);
+    }
+})
+
+const uploader = multer({
+    storage: storage,
+    fileFilter: function (req, file, cb) {
+        if (!(path.extname(file.originalname) === '.png' || path.extname(file.originalname) === '.jpg')) {
+            return cb('Only jpg/png are allowed');
+        }
+
+        cb(null, true);
+    }
+})
 
 const News = require('../models/News');
 const User = require('../models/User');
@@ -28,22 +54,29 @@ function checkIsAdmin(req, res, next) {
     }
 }
 
-
+api.use('/create', uploader.single('news-image'));
 api.post('/create', checkIsAdmin, function(req, res) {
-    let {title, lead, text} = req.body;
+    console.log(req.file);
+    console.log(req.body);
 
-    let busboy = new Busboy({
-        headers: req.headers
-    });
+    for (prop in req.body) {
+        if (req.body[prop] === '') {
+            return res.respond(prop + ' is required!');
+        }
+    }
 
-    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
 
-        var saveTo = path.join(__dirname, '../public/resources/' + transliterate(title).replace(' ', '_') + '.' + mimetype);
-        console.log(saveTo);
-    //   file.pipe(fs.createWriteStream(saveTo));
-    });
 
-    req.pipe(busboy);
+    // let newNews = {
+    //     title: req.body.title,
+    //     lead: req.body.lead,
+    //     text: req.body.text,
+    //     img: 
+    // }
+    // User.create(user, function() {
+    // console.log('created user: ', user);
+    // });
+
 });
 
 module.exports = api;

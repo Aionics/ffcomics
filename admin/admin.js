@@ -41,7 +41,7 @@ m_createNews = {
     title: ko.observable(),
     lead: ko.observable(),
     text: ko.observable(),
-    file: ko.observable()
+    fileInput: 'news-image'
 }
 
 m_createNews.create = function () {
@@ -49,9 +49,9 @@ m_createNews.create = function () {
         title: m_createNews.title(),
         lead: m_createNews.lead(),
         text: m_createNews.text(),
-        file: m_createNews.file(),
+        file: m_createNews.fileInput,
     }
-    Server.post('/api/news/create', data, function(err, data){
+    Server.files('/api/news/create', data, function(err, data){
         if (err) {
             return console.log('login error: ', err);
         }
@@ -76,5 +76,32 @@ $(document).ready(function(){
     ko.applyBindings(m_admin);
     pager.startHistoryJs();
 
-    pager.navigate('login');
+    pager.navigate('news');
+
+    setTimeout(function() {
+        $('#file').change(function (e) {
+            var file = e.target.files[0];
+
+            var data = new FormData();
+            data.append('testName', file);
+            data.append('data', '{"data": "false"}');
+
+            console.log('DATA', data);
+
+            $.ajax({
+                url: '/api/news/create',
+                type: 'post',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(message) {
+                    console.log('recieved: ', message);
+                    done(message.err, message.data);
+                },
+                error: function(xhr, status, err) {
+                    console.log('network error: ', status, err);
+                }
+            })
+        })
+    }, 2000);
 });
