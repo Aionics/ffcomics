@@ -12,7 +12,6 @@ const storage = multer.diskStorage({
 })
 
 const uploader = multer({
-    storage: storage,
     fileFilter: function (req, file, cb) {
         if (!(path.extname(file.originalname) === '.png' || path.extname(file.originalname) === '.jpg')) {
             return cb('Only jpg/png are allowed');
@@ -56,32 +55,6 @@ api.post('/create', checkIsAdmin, function(req, res) {
             return res.respond(prop + ' is required!');
         }
     }
-
-
-
-    // let newNews = {
-    //     title: req.body.title,
-    //     lead: req.body.lead,
-    //     text: req.body.text,
-    //     img:
-    // }
-    // User.create(user, function() {
-    // console.log('created user: ', user);
-    // });
-
 });
 
 module.exports = api;
-
-
-
-    // var busboy = new Busboy({ headers: req.headers });
-    // busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-    //   var saveTo = path.join(os.tmpDir(), path.basename(fieldname));
-    //   file.pipe(fs.createWriteStream(saveTo));
-    // });
-    //
-    // busboy.on('finish', function() {
-    //   res.writeHead(200, { 'Connection': 'close' });
-    //   res.end("That's all folks!");
-    // });
