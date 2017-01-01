@@ -8,7 +8,7 @@ const multer = require('multer')
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'data/images/');
-    }, 
+    },
     filename: function (req, file, cb) {
         console.log(req);
         let newName = transliterate(req.body.title).replace(' ', '_');
@@ -71,7 +71,7 @@ api.post('/create', checkIsAdmin, function(req, res) {
     //     title: req.body.title,
     //     lead: req.body.lead,
     //     text: req.body.text,
-    //     img: 
+    //     img:
     // }
     // User.create(user, function() {
     // console.log('created user: ', user);

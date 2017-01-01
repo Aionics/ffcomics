@@ -12,7 +12,9 @@ const config = require('./config')
 app.set('json spaces', 40);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+// app.use(bodyParser({
+//   uploadDir: path.join(__dirname, '../public/upload/temp')
+// }));
 app.use(cookie_parser(config.session_secret));
 app.use(session({
     secret: config.session_secret,
