@@ -3,7 +3,7 @@
         <div class="col s7 main" data-bind="with: m_site.selectedNews()">
             <img class="responsive-img" src="" alt="" data-bind="attr: {src: '/images/' + src()}">
             <h5 data-bind="text: title">title</h5>
-            <textarea data-bind="text: text">text</textarea>
+            <textarea disabled data-bind="text: text">text</textarea>
         </div>
         <div class="col s5">
             <!-- ko foreach: m_site.news -->
