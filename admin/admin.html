@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>admin</title>
+        <link rel="stylesheet" href="lib/materialize/materialize.min.css">
+        <link rel="stylesheet" href="admin.css">
+        <script src="lib/jquery-3.1.1.min.js" charset="utf-8"></script>
+        <script src="lib/materialize/materialize.min.js" charset="utf-8"></script>
+        <script src="lib/knockout-3.4.1.js" charset="utf-8"></script>
+        <script src="lib/knockout-file-bind.js" charset="utf-8"></script>
+        <script src="lib/pagerjs/pager.js" charset="utf-8"></script>
+        <script src="lib/pagerjs/history.js" charset="utf-8"></script>
+        <script src="lib/pagerjs/history.adapter.native.js" charset="utf-8"></script>
+
+        <script src="js/Server.js" charset="utf-8"></script>
+        <script src="admin.js" charset="utf-8"></script>
+    </head>
+    <body>
+
+        <div class="row">
+            <!-- ko if: user -->
+            <div class="col s2">
+                <div class="sidebar">
+                    <ul>
+                        <!-- ko foreach: pages -->
+                        <!-- ko if: id !== 'login' -->
+                        <li><a class="waves-effect waves-light btn" data-bind="text: name, click: function(){m_admin.load(id); pager.navigate(id);}"></a></li>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </ul>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div class="col s10">
+                <!-- ko foreach: pages -->
+                <div data-bind="page: {
+                    id: id,
+                    source: src,
+                }"></div>
+                <!-- /ko -->
+            </div>
+        </div>
+
+    </body>
+</html>

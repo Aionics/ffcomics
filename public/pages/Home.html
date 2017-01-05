@@ -1,0 +1,23 @@
+<div class="Home">
+    <div class="row news">
+        <div class="col s7 main" data-bind="with: m_site.selectedNews()">
+            <img class="responsive-img" src="" alt="" data-bind="attr: {src: '/images/' + src()}">
+            <h5 data-bind="text: title">title</h5>
+            <textarea disabled data-bind="text: text">text</textarea>
+        </div>
+        <div class="col s5">
+            <!-- ko foreach: m_site.news -->
+            <div class="add" data-bind="
+                click: function() {m_site.selectNews(this)},
+                css: {selected: m_site.selectedNews().id() === id()}
+            ">
+                <h5 data-bind="text: title">header</h5>
+                <p data-bind="text: lead">lead</p>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+    <div class="comicses">
+
+    </div>
+</div>
