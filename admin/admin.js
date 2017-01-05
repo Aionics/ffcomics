@@ -53,7 +53,7 @@ m_createNews.create = function () {
     }
     Server.files('/api/news/create', data, function(err, data){
         if (err) {
-            return console.log('login error: ', err);
+            return console.log('create news: ', err);
         }
         console.log(data);
     });

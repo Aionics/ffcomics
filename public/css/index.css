@@ -34,6 +34,10 @@ textarea {
     transition: background-color 0.2s ease-out;
     cursor: pointer;
     padding: 5px;
+    transition: background-color 0.2s ease-out;
+}
+.news .add.selected{
+    background-color: #ccc;
 }
 .news .add:hover {
     background-color: #ddd;

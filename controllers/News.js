@@ -29,7 +29,7 @@ function checkIsAdmin(req, res, next) {
     }
 }
 
-function checfolder(req, res, next) {
+function checkfolder(req, res, next) {
     if (!fs.existsSync(__dirname + '/../data/')) {
         fs.mkdirSync(__dirname + '/../data/');
     };
@@ -60,13 +60,13 @@ const uploader = multer({
     }
 }).single('news-image');
 
-api.use('/create', checfolder);
+api.use('/create', checkfolder);
 api.use('/create', checkIsAdmin);
 api.use('/create', uploader);
 api.post('/create', function (req, res) {
     for (prop in req.body) {
         if (req.body[prop] === '') {
-            return res.respond(null, pokp + ' is required!');
+            return res.respond(prop + ' is required!');
         }
     }
     let { title, lead, text } = req.body;
@@ -84,7 +84,7 @@ api.post('/create', function (req, res) {
 });
 
 api.post('/', function (req, res, next) {
-    News.find({}, {}, { limit: 4, sort: { 'created_at': -1 } }, function (err, news) {
+    News.find({}, {}, { limit: 5, sort: { 'created_at': -1 } }, function (err, news) {
         if (err) {
             console.log('news error: ', err);
             return res.respond(err);

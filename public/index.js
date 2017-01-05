@@ -1,7 +1,12 @@
 var m_site = {
     pages: ko.observableArray([]),
-    news: ko.observableArray([])
+    news: ko.observableArray([]),
+    selectedNews: ko.observable(new News({}))
 };
+
+m_site.selectNews = function (item) {
+    m_site.selectedNews(item);
+}
 
 m_site.pages([{
         id: 'home',
@@ -26,6 +31,7 @@ function preloadNews() {
         news.forEach(function (_news) {
             m_site.news.push(new News(_news));
         })
+        m_site.selectedNews(m_site.news()[0]);
     })
 }
 
