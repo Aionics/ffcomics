@@ -30,11 +30,11 @@ function checkIsAdmin(req, res, next) {
 }
 
 function checfolder(req, res, next) {
-    if (!fs.existsSync(__dirname + '../data/')) {
-        fs.mkdirSync(__dirname + '../data/');
+    if (!fs.existsSync(__dirname + '/../data/')) {
+        fs.mkdirSync(__dirname + '/../data/');
     };
-    if (!fs.existsSync(__dirname + '../data/images/')) {
-        fs.mkdirSync(__dirname + '../data/images/');
+    if (!fs.existsSync(__dirname + '/../data/images/')) {
+        fs.mkdirSync(__dirname + '/../data/images/');
     };
     next()
 }
