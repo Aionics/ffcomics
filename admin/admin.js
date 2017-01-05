@@ -76,32 +76,5 @@ $(document).ready(function(){
     ko.applyBindings(m_admin);
     pager.startHistoryJs();
 
-    pager.navigate('news');
-
-    setTimeout(function() {
-        $('#file').change(function (e) {
-            var file = e.target.files[0];
-
-            var data = new FormData();
-            data.append('testName', file);
-            data.append('data', '{"data": "false"}');
-
-            console.log('DATA', data);
-
-            $.ajax({
-                url: '/api/news/create',
-                type: 'post',
-                data: data,
-                processData: false,
-                contentType: false,
-                success: function(message) {
-                    console.log('recieved: ', message);
-                    done(message.err, message.data);
-                },
-                error: function(xhr, status, err) {
-                    console.log('network error: ', status, err);
-                }
-            })
-        })
-    }, 2000);
+    pager.navigate('login');
 });

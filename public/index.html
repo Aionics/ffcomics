@@ -13,6 +13,8 @@
 	<script src="lib/pagerjs/history.js" charset="utf-8"></script>
 	<script src="lib/pagerjs/history.adapter.native.js" charset="utf-8"></script>
 
+	<script src="js/Server.js" charset="utf-8"></script>
+	<script src="js/News.js" charset="utf-8"></script>
 	<script src="index.js" charset="utf-8"></script>
 </head>
 <body>
@@ -24,7 +26,7 @@
 					<!-- ko foreach: pages -->
 					<!-- ko if: id !== 'home' -->
 					<li><a href="#" data-bind="
-						text: name,
+						text: nav_name,
 						click: function () { pager.navigate(id) }"></a></li>
 					<!-- /ko -->
 					<!-- /ko -->

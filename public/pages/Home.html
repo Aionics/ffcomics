@@ -1,23 +1,19 @@
 <div class="Home">
     <div class="row news">
-        <div class="col s7 main">
-            <img class="responsive-img" src="http://wpmedia.o.canada.com/2013/07/gabenewell.jpg" alt="">
-            <h5>Хэдер</h5>
-            <textarea>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</textarea>
+        <div class="col s7 main" data-bind="with: m_site.news()[0]">
+            <img class="responsive-img" src="http://wpmedia.o.canada.com/2013/07/gabenewell.jpg" alt="" data-bind="attr: {src: '/images/' + src()}">
+            <h5 data-bind="text: title">title</h5>
+            <textarea data-bind="text: text">text</textarea>
         </div>
         <div class="col s5">
+            <!-- ko foreach: m_site.news -->
+            <!-- ko if: $index() != 0 -->
             <div class="add">
-                <h5>Новость1</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor i</p>
+                <h5 data-bind="text: title">header</h5>
+                <p data-bind="text: lead">lead</p>
             </div>
-            <div class="add">
-                <h5>Новость2</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut en</p>
-            </div>
-            <div class="add">
-                <h5>Новость3</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolo</p>
-            </div>
+            <!-- /ko -->
+            <!-- /ko -->
         </div>
     </div>
     <div class="comicses">

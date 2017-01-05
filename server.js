@@ -40,17 +40,17 @@ app.use(session({
 }))
 
 app.use('/api/news', require('./controllers/News'));
-
 app.use('/admin', require('./controllers/admin'));
-app.use('/admin', express.static('./admin'));
-app.use('/admin', express.static('./resources'));
+
+app.use('/admin', express.static(__dirname + '/admin'));
+app.use('/images', express.static(__dirname + '/data/images'));
+app.use(express.static(__dirname + '/public'));
+// app.use('/*', express.static('./data'));
+
+
 app.get('/admin', function (req, res, next) {
     res.sendFile("admin.html", { root: __dirname + "/admin" })
 })
-
-
-app.use('/', express.static('./public'));
-app.use('/admin', express.static('./resources'));
 app.get('/*', function (req, res, next) {
     res.sendFile("index.html", { root: __dirname + "/public" })
 });
