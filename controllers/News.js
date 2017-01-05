@@ -44,7 +44,7 @@ const storage = multer.diskStorage({
         cb(null, 'data/images/');
     },
     filename: function (req, file, cb) {
-        let newName = escape(transliterate(req.body.title).replace(' ', '_').toLowerCase());
+        let newName = transliterate(req.body.title).replace(/ /g, '_').toLowerCase();
         newName = Date.now() + '-' + newName + path.extname(file.originalname);
         cb(null, newName);
     }
