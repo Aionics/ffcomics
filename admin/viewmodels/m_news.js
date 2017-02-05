@@ -1,4 +1,4 @@
-m_news = {
+var m_news = {
     title: ko.observable(),
     lead: ko.observable(),
     text: ko.observable(),
@@ -8,6 +8,15 @@ m_news = {
         dataURLArray: ko.observableArray(),
     }),
     selectedImages: ko.observableArray()
+}
+var m_news_default = Object.assign({}, m_news);
+
+m_news.clear = function () {
+    m_news.title(null);
+    m_news.lead(null);
+    m_news.text(null);
+    m_news.selectedImages([]);
+    m_news.fileData().clear();
 }
 
 m_news.selectImage = function (file) {
@@ -37,8 +46,10 @@ m_news.create = function () {
     }
     Send.files('/api/news/create', data, function (err, data) {
         if (err) {
+            Materialize.toast('Ошибка: ' + err, 5000, 'errored')
             return console.log('create news: ', err);
         }
-        console.log(data);
+        Materialize.toast('Новость создана!', 5000)
+        m_news.clear()
     });
 }

@@ -17,3 +17,10 @@
 .well .checkbox {
     padding-top: 50px;
 }
+
+.toast.errored {
+    background-color: tomato;
+}
+.toast {
+    background-color: steelblue;
+}
