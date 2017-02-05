@@ -16,7 +16,6 @@ m_admin.pages([
     }
 ])
 
-
 var m_auth = {
     login: ko.observable(),
     password: ko.observable()
@@ -28,7 +27,7 @@ m_auth.authorize = function () {
         password: m_auth.password()
     }
 
-    Server.post('/admin/auth', data, function (err, user) {
+    Send.post('/admin/auth', data, function (err, user) {
         if (err) {
             return console.log('login error: ', err);
         }
@@ -36,28 +35,6 @@ m_auth.authorize = function () {
         pager.navigate('/admin');
     })
 };
-
-m_createNews = {
-    title: ko.observable(),
-    lead: ko.observable(),
-    text: ko.observable(),
-    fileInput: 'news-image'
-}
-
-m_createNews.create = function () {
-    var data = {
-        title: m_createNews.title(),
-        lead: m_createNews.lead(),
-        text: m_createNews.text(),
-        file: m_createNews.fileInput,
-    }
-    Server.files('/api/news/create', data, function(err, data){
-        if (err) {
-            return console.log('create news: ', err);
-        }
-        console.log(data);
-    });
-}
 
 m_admin.load = function (id) {
     console.log(id);

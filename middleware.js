@@ -1,5 +1,8 @@
 module.exports = {
-    checkIsAdmin: function () {
+    checkIsAdmin: function (req, res, next) {
+        const User = require('./models/User');
+        const mongoose = require('mongoose');
+        
         if (req.session.user_id) {
             User.findOne({
                 _id: mongoose.Types.ObjectId(req.session.user_id),
@@ -19,6 +22,7 @@ module.exports = {
         }
     },
     checkFolder: function (req, res, next) {
+        const fs = require('fs');
         if (!fs.existsSync(__dirname + '/../data/')) {
             fs.mkdirSync(__dirname + '/../data/');
         };

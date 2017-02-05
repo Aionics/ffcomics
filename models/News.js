@@ -5,7 +5,12 @@ const NewsProps = {
     title: String,
     lead: String,
     text: String,
-    img: String,
+    images: [
+        {
+            path: String,
+            selected: Boolean
+        }
+    ],
     created_at: {type: Date, default: Date.now}
 };
 

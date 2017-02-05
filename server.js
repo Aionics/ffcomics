@@ -13,8 +13,8 @@ app.set('json spaces', 40);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use(function(err, res, next) {
-    res.respond = function(err, data) {
+app.use(function (err, res, next) {
+    res.respond = function (err, data) {
         if (typeof data == 'undefind') {
             data = null;
         }
@@ -60,8 +60,12 @@ app.listen(PORT, function () {
     console.log('listening on ' + PORT);
 });
 
-
-
 if (!module.parent) {
     mongoose.connect(config.mongo_url, { safe: false });
+    mongoose.connection.on('connected', function () {
+        console.log('Mongoose connected to ' + config.mongo_url + ' sucsessfully!');
+    });
+    mongoose.connection.on('error', function (err) {
+        console.log('Mongoose connection to ' + config.mongo_url + ' failed: ', err);
+    });
 }

@@ -9,3 +9,11 @@
 .sidebar .btn {
     width: 100%;
 }
+
+.file-field {
+    display: inline-block;
+}
+
+.well .checkbox {
+    padding-top: 50px;
+}
