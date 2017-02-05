@@ -7,7 +7,7 @@ const NewsProps = {
     text: String,
     images: [
         {
-            path: String,
+            name: String,
             selected: Boolean
         }
     ],

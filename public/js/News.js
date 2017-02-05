@@ -3,5 +3,5 @@ function News(initObj) {
     this.lead = ko.observable(initObj.lead);
     this.text = ko.observable(initObj.text);
     this.id = ko.observable(initObj._id);
-    this.src = ko.observable(initObj.img);
+    this.images = ko.observableArray(initObj.images);
 }

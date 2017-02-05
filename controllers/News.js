@@ -14,7 +14,7 @@ const storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
         let newName = transliterate(req.body.title).replace(/ /g, '-').toLowerCase();
-        let random36 = (Math.random().toString(36)+'000000000000000000').slice(2, 10)
+        let random36 = (Math.random().toString(36) + '000000000000000000').slice(2, 10)
         newName = newName + '_' + random36 + '-' + Date.now() + path.extname(file.originalname);
         cb(null, newName);
     }
@@ -46,7 +46,7 @@ api.post('/create', function (req, res) {
 
     images.forEach(function (image, index) {
         let _image = {
-            path: image.filename,
+            name: image.filename,
             selected: selectedImages.indexOf(index) !== -1
         };
         imagesToSave.push(_image);
@@ -71,7 +71,23 @@ api.post('/', function (req, res, next) {
             console.log('news error: ', err);
             return res.respond(err);
         }
-        res.respond(null, news);
+        newsToSend = [];
+        news.forEach(function (_news) {
+            let images = [];
+            _news.images.forEach(function (image) {
+                if (image.selected) {
+                    images.push(image.name);
+                }
+            });
+            _newsToSend = {
+                title: _news.title,
+                lead: _news.lead,
+                text: _news.text,
+                images: images
+            }
+            newsToSend.push(_newsToSend);
+        });
+        res.respond(null, newsToSend);
     });
 })
 
