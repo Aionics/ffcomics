@@ -5,6 +5,8 @@
         <title>admin</title>
         <link rel="stylesheet" href="lib/materialize/materialize.min.css">
         <link rel="stylesheet" href="lib/knockoutfilebindings/knockout-file-bindings.css">
+        <link rel="stylesheet" href="lib/fonts/icons/icon.css">
+        <link rel="stylesheet" href="lib/quill/quill.snow.css">
         <link rel="stylesheet" href="admin.css">
         <script src="lib/jquery-3.1.1.min.js" charset="utf-8"></script>
         <script src="lib/materialize/materialize.min.js" charset="utf-8"></script>
@@ -13,10 +15,12 @@
         <script src="lib/pagerjs/pager.js" charset="utf-8"></script>
         <script src="lib/pagerjs/history.js" charset="utf-8"></script>
         <script src="lib/pagerjs/history.adapter.native.js" charset="utf-8"></script>
+        <script src="lib/quill/quill.js" charset="utf-8"></script>
 
         <script src="Send.js" charset="utf-8"></script>
         <script src="admin.js" charset="utf-8"></script>
         <script src="viewmodels/m_news.js" charset="utf-8"></script>
+        <script src="customBindings.js" charset="utf-8"></script>
     </head>
     <body>
         <div class="sidebar br" data-bind="style: {left: sidebarToggle() ? '0px' : '-250px'}">
@@ -31,7 +35,13 @@
                     </div>
                 </div>
                 <a class="waves-effect waves-light btn logout" data-bind="click: function(){m_admin.logout();}">выход</a>
-                <div class="toggle bl0" data-bind="click: function() { sidebarToggle( !sidebarToggle() ); }"></div>
+                <div class="toggle bl0" data-bind="click: function() { sidebarToggle( !sidebarToggle() ); }">
+                    <div class="relative-wrapper">
+                        <div class="absolute-centered">
+                            <i class="material-icons " data-bind="css: { mirrowed: sidebarToggle() }">play_arrow</i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="content">

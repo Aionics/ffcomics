@@ -36,5 +36,4 @@ $(document).ready(function(){
 
     ko.applyBindings(m_admin);
     pager.startHistoryJs();
-
 });

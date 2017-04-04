@@ -6,16 +6,17 @@
     background-color: #e0f2f1;
     transition: left 0.4s ease-out;
     left: -250px;
+    z-index: 50;
 }
 
 .br {
-    border: 1px solid #80cbc4;
+    border: 2px solid #80cbc4;
     border-bottom: 0;
     border-top: 0;
     border-left: 0;
 }
 .bl0 {
-    border: 1px solid #80cbc4;
+    border: 2px solid #80cbc4;
     border-left: 0;
 }
 
@@ -24,6 +25,15 @@
     height: 100%;
     width: 100%;
     position: relative;
+}
+.absolute-centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.mirrowed {
+    transform: scale(-1, 1);
 }
 
 .sidebar .btn {
@@ -46,13 +56,14 @@
     background-color: #e0f2f1;
     border-radius: 0px 10px 10px 0px;
 }
+.sidebar .toggle i {
+    font-size: 44px;
+    color: #80cbc4;
+    display: block;
+}
 
 .file-field {
     display: inline-block;
-}
-
-.well .checkbox {
-    padding-top: 50px;
 }
 
 .toast.errored {
@@ -60,4 +71,11 @@
 }
 .toast {
     background-color: steelblue;
+}
+
+
+.richText {
+    width: 100%;
+    height: 500px;
+    margin-bottom: 50px
 }

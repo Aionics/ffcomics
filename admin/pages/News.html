@@ -1,65 +1,28 @@
-<h4>create news</h4>
-<div class="row">
-    <div class="col s6">
-        <form data-bind="with: m_news">
-            <div class="input-field">
-                <input id="news-title" type="text" data-bind="textInput: title">
-                <label for="news-title">Заголовок</label>
-            </div>
-            <div class="input-field">
-                <input id="news-lead" type="text" data-bind="textInput: lead">
-                <label for="news-lead">Лид</label>
-            </div>
-            <div class="input-field">
-                <textarea id="news-text" class="materialize-textarea" data-bind="textInput: text"></textarea>
-                <label for="news-text">Текст</label>
-            </div>
-            <div class="file-field input-field">
-                <div class="btn">
-                    <span>Выбери картинки</span>
-                    <input type="file" multiple data-bind="fileInput: fileData">
+<div class="container" data-bind="with: m_news">
+    <div class="row">
+        <div class="col s6">
+            <form>
+                <div class="input-field">
+                    <input id="news-title" type="text" data-bind="textInput: title">
+                    <label for="news-title">Заголовок</label>
                 </div>
-            </div>
-            <div class="well" data-bind="fileDrag: fileData">
-                <!-- ko if: fileData().dataURLArray().length !== 0 -->
-
-                    <div class="row">
-                        <div class="col s6">
-                            <h5>Превью</h5>
-                        </div>
-                        <div class="col s6">
-                            <h5>Показывать на главной?</h5>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col s6" data-bind="foreach: {data: fileData().dataURLArray, as: 'dataURL'}">
-                            <div class="row">
-                                <img style="height: 125px;" data-bind="attr: {src: dataURL}">
-                            </div>
-                        </div>
-                        <div class="col s6" data-bind="foreach: {data: fileData().fileArray, as: 'file'}">
-                            <div class="row checkbox" style="height: 125px;">
-                                <input type="checkbox" class="filled-in" data-bind="checked: m_news.selectedImages().indexOf( file ) !== -1"/>
-                                <label for="filled-in-box" data-bind="
-                                    text: file.name,
-                                    click: function () {
-                                        m_news.selectImage(file)
-                                    }
-                                ">1</label>
-                            </div>
-                        </div>
-                    </div>
-
-                <!-- /ko -->
-                <!-- ko if: fileData().fileArray().length === 0 -->
-                <div class="row">
-                    <p>или перетащи их сюда</p>
+                <div class="input-field">
+                    <input id="news-lead" type="text" data-bind="textInput: lead">
+                    <label for="news-lead">Лид</label>
                 </div>
-                <!-- /ko -->
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
+            <div class="richText">
+                <div data-bind="richText: test"></div>
             </div>
-
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12">
             <a class="waves-effect waves-light btn" data-bind="click: function() {m_news.create()} ">Запостить</a>
-        </form>
+        </div>
     </div>
 </div>

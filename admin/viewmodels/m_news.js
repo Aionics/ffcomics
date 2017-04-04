@@ -7,7 +7,8 @@ var m_news = {
         fileArray: ko.observableArray(),
         dataURLArray: ko.observableArray(),
     }),
-    selectedImages: ko.observableArray()
+    selectedImages: ko.observableArray(),
+    test: ko.observable()
 }
 var m_news_default = Object.assign({}, m_news);
 
