@@ -1,40 +1,24 @@
 var m_admin = {
     pages: ko.observableArray([]),
-    user: ko.observable()
+    user: ko.observable(),
+    sidebarToggle: ko.observable(false)
 };
 
 m_admin.pages([
-    {
-        id: 'login',
-        name: '',
-        src: 'pages/Login.html'
-    },
     {
         id: 'news',
         name: 'Новости',
         src: 'pages/News.html'
     }
 ])
-
-var m_auth = {
-    login: ko.observable(),
-    password: ko.observable()
-};
-
-m_auth.authorize = function () {
-    var data = {
-        login: m_auth.login(),
-        password: m_auth.password()
-    }
-
-    Send.post('/admin/auth', data, function (err, user) {
+m_admin.logout = function() {
+    Send.post('/user/logout', {}, function (err, answer) {
         if (err) {
-            return console.log('login error: ', err);
+            return console.error('load news faild: ', err);
         }
-        m_admin.user(user);
-        pager.navigate('/admin');
+        location.reload();
     })
-};
+}
 
 m_admin.load = function (id) {
     console.log(id);
@@ -53,5 +37,4 @@ $(document).ready(function(){
     ko.applyBindings(m_admin);
     pager.startHistoryJs();
 
-    pager.navigate('login');
 });

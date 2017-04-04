@@ -1,4 +1,4 @@
-var Server = (function(){
+var Send = (function(){
     var _request = function(method){
         return function(url, data, done){
             console.log('sending data: ', data);
@@ -49,10 +49,10 @@ var Server = (function(){
             return response;
         };
     };
-    var Server = {
+    var Send = {
         get: _request('get'),
         post: _request('post'),
         files: _files('post')
     };
-    return Server;
+    return Send;
 })();

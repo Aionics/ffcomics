@@ -1,13 +1,50 @@
-.form {
+.sidebar {
     position: absolute;
-    width: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    width: 250px;
+    top: 0;
+    bottom: 0;
+    background-color: #e0f2f1;
+    transition: left 0.4s ease-out;
+    left: -250px;
+}
+
+.br {
+    border: 1px solid #80cbc4;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 0;
+}
+.bl0 {
+    border: 1px solid #80cbc4;
+    border-left: 0;
+}
+
+
+.relative-wrapper {
+    height: 100%;
+    width: 100%;
+    position: relative;
 }
 
 .sidebar .btn {
     width: 100%;
+}
+.sidebar .logout {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 100px;
+    padding: 0 5px;
+}
+.sidebar .toggle {
+    position: absolute;
+    bottom: 10px;
+    right: -50px;
+    padding: 0 5px;
+    width: 50px;
+    height: 50px;
+    background-color: #e0f2f1;
+    border-radius: 0px 10px 10px 0px;
 }
 
 .file-field {

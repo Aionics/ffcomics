@@ -19,30 +19,28 @@
         <script src="viewmodels/m_news.js" charset="utf-8"></script>
     </head>
     <body>
-
-        <div class="row">
-            <!-- ko if: user -->
-            <div class="col s2">
-                <div class="sidebar">
-                    <ul>
-                        <!-- ko foreach: pages -->
-                        <!-- ko if: id !== 'login' -->
-                        <li><a class="waves-effect waves-light btn" data-bind="text: name, click: function(){m_admin.load(id); pager.navigate(id);}"></a></li>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                    </ul>
+        <div class="sidebar br" data-bind="style: {left: sidebarToggle() ? '0px' : '-250px'}">
+            <div class="relative-wrapper">
+                <div class="row">
+                    <div class="col s12">
+                        <ul>
+                            <!-- ko foreach: pages -->
+                            <li><a class="waves-effect waves-light btn" data-bind="text: name, click: function(){m_admin.load(id); pager.navigate(id);}"></a></li>
+                            <!-- /ko -->
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <!-- /ko -->
-            <div class="col s10">
-                <!-- ko foreach: pages -->
-                <div data-bind="page: {
-                    id: id,
-                    source: src,
-                }"></div>
-                <!-- /ko -->
+                <a class="waves-effect waves-light btn logout" data-bind="click: function(){m_admin.logout();}">выход</a>
+                <div class="toggle bl0" data-bind="click: function() { sidebarToggle( !sidebarToggle() ); }"></div>
             </div>
         </div>
-
+        <div class="content">
+            <!-- ko foreach: pages -->
+            <div data-bind="page: {
+                id: id,
+                source: src,
+            }"></div>
+            <!-- /ko -->
+        </div>
     </body>
 </html>

@@ -40,7 +40,7 @@ app.use(session({
 }))
 
 app.use('/api/news', require('./controllers/News'));
-app.use('/admin', require('./controllers/admin'));
+app.use('/user', require('./controllers/User'));
 
 app.use('/admin', express.static(__dirname + '/admin'));
 app.use('/images', express.static(__dirname + '/data/images'));
@@ -48,8 +48,25 @@ app.use(express.static(__dirname + '/public'));
 // app.use('/*', express.static('./data'));
 
 
-app.get('/admin', function (req, res, next) {
-    res.sendFile("admin.html", { root: __dirname + "/admin" })
+app.get('/admin*', function (req, res, next) {
+    const User = require('./models/User');
+    if (req.session.user_id) {
+        User.findOne({
+            _id: mongoose.Types.ObjectId(req.session.user_id),
+            is_admin: true
+        }, function (err, user) {
+            if (err) {
+                return res.respond(err);
+            }
+
+            if (!user) {
+                return res.sendFile("login.html", { root: __dirname + "/public" })
+            }
+            res.sendFile("admin.html", { root: __dirname + "/admin" })
+        });
+    } else {
+        return res.sendFile("login.html", { root: __dirname + "/public" })
+    }
 })
 app.get('/*', function (req, res, next) {
     res.sendFile("index.html", { root: __dirname + "/public" })
