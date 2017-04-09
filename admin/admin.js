@@ -25,6 +25,9 @@ m_admin.load = function (id) {
 }
 
 $(document).ready(function(){
+    setTimeout(function(){
+        $('.tooltipped').tooltip({delay: 50});
+    }, 2000)
     var pager = new Pager($, ko);
 	pager.extendWithPage(m_admin);
 

@@ -1,4 +1,9 @@
 <div class="container" data-bind="with: m_news">
+    <div class="row bb">
+        <div class="col s12">
+            <h5>Новая нвоость:</h5>
+        </div>
+    </div>
     <div class="row">
         <div class="col s6">
             <form>
@@ -13,16 +18,109 @@
             </form>
         </div>
     </div>
+
+    <!-- ko foreach: {data: items, as: 'item'} -->
     <div class="row">
-        <div class="col s12">
-            <div class="richText">
-                <div data-bind="richText: test"></div>
+        <div class="col s12" data-bind="template: {name: item.name(), data: item}">
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <hr>
+    <div class="row">
+        <div class="col s4">
+            <a class="waves-effect waves-light btn disabled" data-bind="click: function() {}">Запостить</a>
+        </div>
+        <div class="col s8">
+
+            <a class="btn-floating btn-medium waves-effect waves-light tooltipped" data-bind="click: function() {
+                m_news.items.push( new VariationCover() )
+            }" data-position="bottom" data-delay="50" data-tooltip="вариативные обложки">
+                <i class="material-icons">view_column</i>
+            </a>
+            <a class="btn-floating btn-medium waves-effect waves-light tooltipped" data-bind="click: function() {
+                m_news.items.push( new RichText() )
+            }" data-position="bottom" data-delay="50" data-tooltip="текст">
+                <i class="material-icons">subject</i>
+            </a>
+            <a class="btn-floating btn-medium waves-effect waves-light tooltipped" data-bind="click: function() {
+                m_news.items.push( new YouTube() )
+            }" data-position="bottom" data-delay="50" data-tooltip="видяшка с ютуба">
+                <i class="material-icons">videocam</i>
+            </a>
+
+        </div>
+    </div>
+
+    <script type="text/html" id="variational-covers">
+        <div class="relative-wrapper news-item">
+            <div class="options">
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: function() {
+                    $(inputField()).click()
+                }">
+                    <i class="material-icons">mode_edit</i>
+                </a>
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.removeItem.bind($data)">
+                    <i class="material-icons">delete</i>
+                </a>
+            </div>
+            <div class="variational-covers">
+                <input type="file" multiple="multiple" name="covers[]" accept="image" class="fileInput" style="display:none" data-bind="files: {inputField: inputField, images: images}"/>
+
+                <!-- ko if: images().length == 0 -->
+                <a class="waves-effect waves-light btn-large absolute-centered" data-bind="click: function() {
+                    $(inputField()).click()
+                }">Выбери изображения</a>
+                <!-- /ko -->
+
+                <!-- ko ifnot: images().length == 0 -->
+                    <!-- ko foreach: {data: images, as: 'img'} -->
+                        <div class="img-wrapper" data-bind="
+                            style:{
+                                width: $index()==0 || $index()==$parent.images().length-1 ? 100/$parent.images().length-1+5+'%' : 100/$parent.images().length+'%',
+                                left: $index()==0 || $index()==$parent.images().length-1 ? (100/$parent.images().length)*($index())-3+4*$index()/($parent.images().length-1)+'%' : (100/$parent.images().length)*($index())+1+'%'
+                        }, click: function () {console.log($parent)}">
+                            <div class="img" data-bind="
+                                style:{
+                                    backgroundImage: 'url(' + img + ')'}">
+                            </div>
+                        </div>
+                    <!-- /ko -->
+                <!-- /ko -->
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col s12">
-            <a class="waves-effect waves-light btn" data-bind="click: function() {m_news.create()} ">Запостить</a>
+    </script>
+
+    <script type="text/html" id="rich-text">
+        <div class="relative-wrapper news-item">
+            <div class="options">
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.removeItem.bind($data)">
+                    <i class="material-icons">delete</i>
+                </a>
+            </div>
+            <div class="richText" data-bind="richText: textField"></div>
         </div>
-    </div>
+    </script>
+
+    <script type="text/html" id="youtube">
+        <div class="relative-wrapper news-item">
+            <div class="options">
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.removeItem.bind($data)">
+                    <i class="material-icons">delete</i>
+                </a>
+            </div>
+            <!-- ko if: src && src().indexOf('www.youtube.com') !== -1 -->
+                <iframe frameborder="0" allowfullscreen data-bind="attr: {src: src}"></iframe>
+            <!-- /ko -->
+            <!-- ko ifnot: src && src().indexOf('www.youtube.com') !== -1 -->
+            <div class=row>
+                <div class="col s6 offset-s3">
+                    <label>ссылка</label>
+                    <input type="text" data-bind="textInput: src">
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </script>
+
 </div>
