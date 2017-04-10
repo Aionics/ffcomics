@@ -135,4 +135,4 @@
     transform: skew(5deg);
 }
 .variational-covers .img-wrapper:hover{filter:grayscale(30%);}
-.variational-covers img:hover{filter:grayscale(30%);}
+.variational-covers .img:hover{filter:grayscale(30%);}
