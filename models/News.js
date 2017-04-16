@@ -4,13 +4,11 @@ const Schema = mongoose.Schema;
 const NewsProps = {
     title: String,
     lead: String,
-    text: String,
-    images: [
-        {
-            name: String,
-            selected: Boolean
-        }
-    ],
+    items: [{
+        name: String,
+        promoted: Boolean,
+        data: {}
+    }],
     created_at: {type: Date, default: Date.now}
 };
 

@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
 const config = require('./config')
+global.__rootDir = __dirname;
+
 
 app.set('json spaces', 40);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -39,7 +41,7 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection })
 }))
 
-app.use('/api/news', require('./controllers/News'));
+app.use('/news', require('./controllers/News'));
 app.use('/user', require('./controllers/User'));
 
 app.use('/admin', express.static(__dirname + '/admin'));
@@ -75,6 +77,13 @@ app.get('/*', function (req, res, next) {
 const PORT = 8087;
 app.listen(PORT, function () {
     console.log('listening on ' + PORT);
+    const fs = require('fs');
+    if (!fs.existsSync(__dirname + '/data/')) {
+        fs.mkdirSync(__dirname + '/data/');
+    };
+    if (!fs.existsSync(__dirname + '/data/images/')) {
+        fs.mkdirSync(__dirname + '/data/images/');
+    };
 });
 
 if (!module.parent) {

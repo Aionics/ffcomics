@@ -20,15 +20,5 @@ module.exports = {
         } else {
             return res.respond('you need to log in');
         }
-    },
-    checkFolder: function (req, res, next) {
-        const fs = require('fs');
-        if (!fs.existsSync(__dirname + '/data/')) {
-            fs.mkdirSync(__dirname + '/data/');
-        };
-        if (!fs.existsSync(__dirname + '/data/images/')) {
-            fs.mkdirSync(__dirname + '/data/images/');
-        };
-        next()
     }
 }

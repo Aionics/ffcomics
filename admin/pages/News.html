@@ -29,7 +29,7 @@
     <hr>
     <div class="row">
         <div class="col s4">
-            <a class="waves-effect waves-light btn disabled" data-bind="click: function() {}">Запостить</a>
+            <a class="waves-effect waves-light btn" data-bind="click: postNews.bind($data)">Запостить</a>
         </div>
         <div class="col s8">
 
@@ -60,12 +60,15 @@
                 }">
                     <i class="material-icons">mode_edit</i>
                 </a>
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.promoteItem.bind($data)">
+                    <i class="material-icons" data-bind="text: promoted() ? 'visibility' : 'visibility_off'"></i>
+                </a>
                 <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.removeItem.bind($data)">
                     <i class="material-icons">delete</i>
                 </a>
             </div>
             <div class="variational-covers">
-                <input type="file" multiple="multiple" name="covers[]" accept="image" class="fileInput" style="display:none" data-bind="files: {inputField: inputField, images: images}"/>
+                <input type="file" multiple="multiple" name="covers[]" accept="image/*" class="fileInput" style="display:none" data-bind="files: {inputField: inputField, images: images}"/>
 
                 <!-- ko if: images().length == 0 -->
                 <a class="waves-effect waves-light btn-large absolute-centered" data-bind="click: function() {
@@ -79,10 +82,14 @@
                             style:{
                                 width: $index()==0 || $index()==$parent.images().length-1 ? 100/$parent.images().length-1+5+'%' : 100/$parent.images().length+'%',
                                 left: $index()==0 || $index()==$parent.images().length-1 ? (100/$parent.images().length)*($index())-3+4*$index()/($parent.images().length-1)+'%' : (100/$parent.images().length)*($index())+1+'%'
-                        }, click: function () {console.log($parent)}">
+                            },
+                            click: function () {
+                                m_news.selectedCover(img)
+                                $('#modal-covers').modal('open');
+                            }">
                             <div class="img" data-bind="
                                 style:{
-                                    backgroundImage: 'url(' + img + ')'}">
+                                    backgroundImage: 'url(' + img.src + ')'}">
                             </div>
                         </div>
                     <!-- /ko -->
@@ -94,6 +101,9 @@
     <script type="text/html" id="rich-text">
         <div class="relative-wrapper news-item">
             <div class="options">
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.promoteItem.bind($data)">
+                    <i class="material-icons" data-bind="text: promoted() ? 'visibility' : 'visibility_off'"></i>
+                </a>
                 <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.removeItem.bind($data)">
                     <i class="material-icons">delete</i>
                 </a>
@@ -105,6 +115,9 @@
     <script type="text/html" id="youtube">
         <div class="relative-wrapper news-item">
             <div class="options">
+                <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.promoteItem.bind($data)">
+                    <i class="material-icons" data-bind="text: promoted() ? 'visibility' : 'visibility_off'"></i>
+                </a>
                 <a class="btn-floating btn-medium waves-effect waves-light btn-right" data-bind="click: m_news.removeItem.bind($data)">
                     <i class="material-icons">delete</i>
                 </a>
@@ -115,12 +128,38 @@
             <!-- ko ifnot: src && src().indexOf('www.youtube.com') !== -1 -->
             <div class=row>
                 <div class="col s6 offset-s3">
-                    <label>ссылка</label>
                     <input type="text" data-bind="textInput: src">
+                    <label>ссылка</label>
                 </div>
             </div>
             <!-- /ko -->
         </div>
     </script>
+
+    <div id="modal-covers" class="modal" data-bind="with: selectedCover">
+        <div class="modal-content">
+            <h5>Информация об обложке</h5>
+            <input id="news-cover-verse" type="text">
+            <label>Вселенная</label>
+            <input id="news-cover-name" type="text">
+            <label>Название и номер</label>
+            <input id="news-cover-author" type="text">
+            <label>Автор</label>
+            <input id="news-cover-comment" type="text">
+            <label>Комментарий</label>
+            <input id="news-cover-source" type="text">
+            <label>Источник</label>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-light btn" data-bind="click: function($data) {
+                this.verse = $('#news-cover-verse').val();
+                this.name = $('#news-cover-name').val();
+                this.author = $('#news-cover-author').val();
+                this.comment = $('#news-cover-comment').val();
+                this.source = $('#news-cover-source').val();
+                $('#modal-covers').modal('close');
+            }">ok</a>
+        </div>
+    </div>
 
 </div>

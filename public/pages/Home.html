@@ -1,20 +1,22 @@
 <div class="Home">
     <div class="row news">
-        <div class="col s7 main" data-bind="with: m_site.selectedNews()">
-            <!-- ko foreach: {data: images, as: 'name'} -->
-            <img class="responsive-img" src="" alt="" data-bind="attr: {src: '/images/' + name}">
+        <div class="col s8 main" data-bind="with: m_site.selectedNews()">
+            <h4 data-bind="text: title">title</h4>
+            <h5 data-bind="text: lead">lead</h5>
+            <!-- ko foreach: {data: items, as: 'item'} -->
+                <!-- ko if: item.promoted -->
+                    <div data-bind="template: {name: item.name, data: item}"></div>
+                <!-- /ko -->
             <!-- /ko -->
-            <h5 data-bind="text: title">title</h5>
-            <textarea disabled data-bind="text: text">text</textarea>
         </div>
-        <div class="col s5">
-            <!-- ko foreach: m_site.news -->
+        <div class="col s4">
+            <!-- ko foreach: {data: m_site.news, as: 'news'} -->
             <div class="add" data-bind="
-                click: function() {m_site.selectNews(this)},
-                css: {selected: m_site.selectedNews().id() === id()}
+                click: m_site.selectNews.bind(news),
+                css: {selected: m_site.selectedNews() == news}
             ">
-                <h5 data-bind="text: title">header</h5>
-                <p data-bind="text: lead">lead</p>
+                <h5 data-bind="text: news.title()">header</h5>
+                <p data-bind="text: news.lead()">lead</p>
             </div>
             <!-- /ko -->
         </div>
@@ -22,4 +24,31 @@
     <div class="comicses">
 
     </div>
+
+
+    <script type="text/html" id="variationalCovers">
+        <div class="variational-covers">
+            <!-- ko ifnot: data.length == 0 -->
+                <!-- ko foreach: {data: data, as: 'img'} -->
+                    <div class="img-wrapper" data-bind="
+                        style:{
+                            width: $index()==0 || $index()==$parent.data.length-1 ? 100/$parent.data.length-1+5+'%' : 100/$parent.data.length+'%',
+                            left: $index()==0 || $index()==$parent.data.length-1 ? (100/$parent.data.length)*($index())-3+4*$index()/($parent.data.length-1)+'%' : (100/$parent.data.length)*($index())+1+'%'
+                        }">
+                        <div class="img" data-bind="
+                            style:{
+                                backgroundImage: 'url(/images/' + img.src + ')'}">
+                        </div>
+                    </div>
+                <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </script>
+    <script type="text/html" id="text">
+        <div data-bind="html: data">
+    </script>
+    <script type="text/html" id="youtube">
+        <iframe frameborder="0" allowfullscreen data-bind="attr: {src: data}"></iframe>
+    </script>
+
 </div>

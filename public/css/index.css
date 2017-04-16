@@ -42,6 +42,10 @@ textarea {
 .news .add:hover {
     background-color: #ddd;
 }
+.news iframe {
+    height: 500px;
+    width: 100%;
+}
 .hprofile {
     height: 450px !important;
 }
@@ -52,3 +56,37 @@ textarea {
     background: url('/resources/img/ffcomics.png') no-repeat 0 0;
     background-size: auto 64px;
 }
+
+.variational-covers {
+    overflow: hidden;
+    position: relative;
+    height: 460px;
+}
+.variational-covers .img-wrapper{background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    background-color: white;
+    position:absolute;
+    overflow:hidden;
+    filter: grayscale(100%);
+        height:460px !important;
+        -webkit-transform: skew(-5deg);
+        -ms-transform: skew(-5deg);
+        transform: skew(-5deg);
+}
+.variational-covers .img{background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: white;
+    overflow:hidden;
+    filter: grayscale(100%);
+    width: 200%;
+    left:-45%;
+    position: relative;
+    height:100% !important;
+    -webkit-transform: skew(5deg);
+    -ms-transform: skew(5deg);
+    transform: skew(5deg);
+}
+.variational-covers .img-wrapper:hover{filter:grayscale(30%);}
+.variational-covers .img:hover{filter:grayscale(30%);}

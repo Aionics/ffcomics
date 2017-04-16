@@ -4,8 +4,8 @@ var m_site = {
     selectedNews: ko.observable(new News({}))
 };
 
-m_site.selectNews = function (item) {
-    m_site.selectedNews(item);
+m_site.selectNews = function () {
+    m_site.selectedNews(this);
 }
 
 m_site.pages([{
@@ -23,7 +23,7 @@ m_site.pages([{
 ])
 
 function preloadNews() {
-    Server.post('api/news', {}, function (err, news) {
+    Send.get('/news/lastnews', null, function (err, news) {
         if (err) {
             return console.error('load news faild: ', err);
         }

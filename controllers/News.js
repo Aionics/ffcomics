@@ -1,94 +1,74 @@
 const express = require('express');
-const api = express();
+const news = express();
 const mongoose = require('mongoose');
 const middleware = require('../middleware');
 const path = require('path');
 const transliterate = require('transliterate');
-const multer = require('multer')
+const multiparty = require('multiparty');
+const async = require('async');
+const fs = require('fs');
 
 const News = require('../models/News');
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'data/images/');
-    },
-    filename: function (req, file, cb) {
-        let newName = transliterate(req.body.title).replace(/ /g, '-').toLowerCase();
-        let random36 = (Math.random().toString(36) + '000000000000000000').slice(2, 10)
-        newName = newName + '_' + random36 + '-' + Date.now() + path.extname(file.originalname);
-        cb(null, newName);
-    }
-})
-const uploader = multer({
-    storage: storage,
-    fileFilter: function (req, file, cb) {
-        if (!(path.extname(file.originalname) === '.png' || path.extname(file.originalname) === '.jpg')) {
-            return cb('Only jpg/png are allowed');
+news.post('/create', middleware.checkIsAdmin, function (req, res) {
+    const form = new multiparty.Form();
+    form.parse(req, function (err, fields, files) {
+        if (err) {
+            console.log(err);
+            return res.respond(err);
         }
+        let title = fields.title[0];
+        let lead = fields.lead[0];
+        let items = JSON.parse(fields.items[0]);
+        let currentTime = Date.now()
 
-        cb(null, true);
-    }
-}).array('images[]', 12);
+        async.map(
+            files,
+            function (imageSet, nextImageSet) {
+                let index = 0;
+                async.map(
+                    imageSet,
+                    function (rawImage, nextRawImage) {
+                        let image = fs.readFileSync(rawImage.path);
+                        let extname = path.extname(rawImage.originalFilename);
+                        let imageName = transliterate(title).replace(/ /g, '-').toLowerCase() + '-' + index + '-' + currentTime + extname;
+                        fs.writeFileSync(__rootDir + '/data/images/' + imageName, image);
 
-api.use('/create', middleware.checkFolder);
-api.use('/create', middleware.checkIsAdmin);
-api.use('/create', uploader);
-api.post('/create', function (req, res) {
-    for (prop in req.body) {
-        if (req.body[prop] === 'undefined' || req.body[prop] === '') {
-            return res.respond(prop + ' is required!');
-            break;
-        }
-    }
-    let { title, lead, text, selectedImages } = req.body;
-    let images = req.files;
-    let imagesToSave = []
+                        let numberOfItem = rawImage.fieldName.split('#')[1]
+                        items[numberOfItem].data[index].src = imageName
+                        index++;
+                        nextRawImage()
+                    }
+                )
+                nextImageSet()
+            },
+            function (err, result) {
+                newNews = {
+                    title: title,
+                    lead: lead,
+                    items: items
+                }
+                News.create(newNews, function (err) {
+                    if (err) {
+                        console.log('posted news: ', newNews);
+                        return res.respond(err);
+                    }
+                    res.respond(null, 'Новость опубликована!');
+                });
+            }
+        )
 
-    images.forEach(function (image, index) {
-        let _image = {
-            name: image.filename,
-            selected: selectedImages.indexOf(index) !== -1
-        };
-        imagesToSave.push(_image);
-    })
-
-    let newNews = {
-        title: title,
-        lead: lead,
-        text: text,
-        images: imagesToSave
-    }
-    News.create(newNews, function () {
-        console.log('posted news: ', newNews);
     });
-
-    res.respond(null, 'ok');
 });
 
-api.post('/', function (req, res, next) {
-    News.find({}, {}, { limit: 5, sort: { 'created_at': -1 } }, function (err, news) {
+news.get('/lastnews', function (req, res, next) {
+    News.find({}, {}, { limit: 5, sort: { 'created_at': -1 } }, function (err, lastNews) {
         if (err) {
             console.log('news error: ', err);
             return res.respond(err);
         }
-        newsToSend = [];
-        news.forEach(function (_news) {
-            let images = [];
-            _news.images.forEach(function (image) {
-                if (image.selected) {
-                    images.push(image.name);
-                }
-            });
-            _newsToSend = {
-                title: _news.title,
-                lead: _news.lead,
-                text: _news.text,
-                images: images
-            }
-            newsToSend.push(_newsToSend);
-        });
-        res.respond(null, newsToSend);
+        res.respond(null, lastNews);
     });
-})
+});
 
-module.exports = api;
+module.exports = news;

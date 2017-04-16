@@ -1,7 +1,7 @@
 ko.bindingHandlers.richText = {
     init: function (element, valueAccessor) {
-        var value = valueAccessor()
-        var quill = new Quill(element, {
+        let value = valueAccessor();
+        let quill = new Quill(element, {
             theme: 'snow',
             modules: {
                 toolbar: [
@@ -15,28 +15,30 @@ ko.bindingHandlers.richText = {
             history: {
                 'delay': 2500,
                 'userOnly': true
-            },
+            }
         });
         value(quill.root);
     }
-}
+};
 ko.bindingHandlers.files = {
     init: function (element, valueAccessor) {
-        var inputField = valueAccessor().inputField;
-        var images = valueAccessor().images;
+        let inputField = valueAccessor().inputField;
+        let images = valueAccessor().images;
 
         inputField(element);
 
         $(element).change(function () {
-            var files = element.files;
+            let files = element.files;
             images([]);
             for (file of files) {
                 let reader = new FileReader();
                 reader.onloadend = function() {
-                    images.push(reader.result)
-                }
+                    images.push({
+                        src: reader.result
+                    })
+                };
                 reader.readAsDataURL(file);
             }
         });
     }
-}
+};

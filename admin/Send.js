@@ -20,19 +20,8 @@ var Send = (function () {
         };
     };
     var _files = function (method) {
-        return function (url, data, done) {
-            var images = data.images;
-            delete data.images;
-
-            var formData = new FormData();
-            for (prop in data) {
-                formData.append(prop, data[prop]);
-            }
-            images.forEach(function (image, index) {
-                formData.append('images[]', image);
-            });
-
-            console.log('sending data: ', data);
+        return function (url, formData, done) {
+            console.log('sending data: ', formData);
             var response = $.ajax({
                 url: url,
                 type: 'post',
@@ -53,7 +42,7 @@ var Send = (function () {
     var Send = {
         get: _request('get'),
         post: _request('post'),
-        files: _files('post')
+        formData: _files('formData')
     };
     return Send;
 })();
