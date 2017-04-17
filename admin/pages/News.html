@@ -139,16 +139,26 @@
     <div id="modal-covers" class="modal" data-bind="with: selectedCover">
         <div class="modal-content">
             <h5>Информация об обложке</h5>
-            <input id="news-cover-verse" type="text">
-            <label>Вселенная</label>
-            <input id="news-cover-name" type="text">
-            <label>Название и номер</label>
-            <input id="news-cover-author" type="text">
-            <label>Автор</label>
-            <input id="news-cover-comment" type="text">
-            <label>Комментарий</label>
-            <input id="news-cover-source" type="text">
-            <label>Источник</label>
+            <div class="input-field">
+                <input id="news-cover-verse" type="text">
+                <label for="news-cover-verse">Вселенная</label>
+            </div>
+            <div class="input-field">
+                <input id="news-cover-name" type="text">
+                <label for="news-cover-name">Название и номер</label>
+            </div>
+            <div class="input-field">
+                <input id="news-cover-author" type="text">
+                <label for="news-cover-author">Автор</label>
+            </div>
+            <div class="input-field">
+                <input id="news-cover-comment" type="text">
+                <label for="news-cover-comment">Комментарий</label>
+            </div>
+            <div class="input-field">
+                <input id="news-cover-source" type="text">
+                <label for="news-cover-source">Источник</label>
+            </div>
         </div>
         <div class="modal-footer">
             <a class="waves-effect waves-light btn" data-bind="click: function($data) {
