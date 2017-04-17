@@ -53,6 +53,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/admin*', function (req, res, next) {
     const User = require('./models/User');
     if (req.session.user_id) {
+        console.log(123);
         User.findOne({
             _id: mongoose.Types.ObjectId(req.session.user_id),
             is_admin: true
