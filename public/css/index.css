@@ -62,19 +62,22 @@ textarea {
     position: relative;
     height: 460px;
 }
-.variational-covers .img-wrapper{background-size: cover;
+.variational-covers .img-wrapper{
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center bottom;
     background-color: white;
     position:absolute;
     overflow:hidden;
+    transition: background-size 0.5s ease-out
     filter: grayscale(100%);
         height:460px !important;
         -webkit-transform: skew(-5deg);
         -ms-transform: skew(-5deg);
         transform: skew(-5deg);
 }
-.variational-covers .img{background-size: cover;
+.variational-covers .img{
+    background-size: 100%;
     background-repeat: no-repeat;
     background-position: center;
     background-color: white;
@@ -88,5 +91,11 @@ textarea {
     -ms-transform: skew(5deg);
     transform: skew(5deg);
 }
-.variational-covers .img-wrapper:hover{filter:grayscale(30%);}
-.variational-covers .img:hover{filter:grayscale(30%);}
+.variational-covers .img-wrapper:hover{
+    filter:grayscale(30%);
+    background-size: 150%;
+}
+.variational-covers .img:hover{
+    filter:grayscale(30%);
+    background-size: 150%;
+}
