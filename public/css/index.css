@@ -69,7 +69,7 @@ textarea {
     background-color: white;
     position:absolute;
     overflow:hidden;
-    transition: background-size 0.5s ease-out
+    transition: background-size 0.5s ease-out;
     filter: grayscale(100%);
         height:460px !important;
         -webkit-transform: skew(-5deg);
